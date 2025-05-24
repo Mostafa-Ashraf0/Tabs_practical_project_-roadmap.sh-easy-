@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            position: relative;
+            margin: 0;
+            height: 100vh;
+        }
+        .main{
+            position: absolute;
+            width: 55%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 10px 30px;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 20px;
+        }
+        ul{
+            display: flex;
+            padding: 0;
+            list-style-type: none;
+        }
+        ul li{
+            font-size: 20px;
+            margin-right: 20px;
+            color: rgba(0, 0, 0, 0.379);
+            cursor: pointer;
+        }
+        ul .active{
+            color: black;
+            padding-bottom: 10px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: white white black white;
+        }
+        h3{
+            font-size: 23px;
+            line-height: 1.5em;
+            font-weight: 500;
+        }
+        .tab{
+            width: 100%;
+            height: 150px;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            border-radius: 20px;
+        }
+        .tab{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <ul class="icons">
+            <li data-nu="0" class="active">First tab</li>
+            <li data-nu="1" >Secound tab</li>
+            <li data-nu="2" >Third tab</li>
+            <li data-nu="3" >Forth tab</li>
+        </ul>
+        <h3>Clicking each tab should hide the content of the other tab and show the
+            content of the clicked tab.By default enable the first tab.</h3>
+        <div class="tab">First tab content</div>
+        <h3>Add some dummy content or just add a simple text showing the tab</h3>
+    </div>
+    <script>
+        let list = document.querySelectorAll("li");
+        let tab = document.querySelector(".tab");
+        let text = ["First tab content","Secound tab content","Third tab content","Forth tab content"];
+
+        list.forEach(item =>{
+            item.addEventListener("click", (e) =>{
+                list.forEach(li => li.classList.remove("active"));
+                e.target.classList.add("active");
+                tab.innerHTML = "";
+                let index = parseInt(e.target.dataset.nu);
+                let child = document.createTextNode(text[index]);
+                tab.appendChild(child)
+            })
+        })
+    </script>
+</body>
+</html>
